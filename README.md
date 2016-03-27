@@ -3,9 +3,20 @@
 
 # mdn
 
-> Man pages for web APIs using MDN
+> Man pages for web APIs using [MDN][mdn]
 
 ## Install
+
+```sh
+$ npm i @rafaelrinaldi/mdn -g
+```
+
+## Usage
+
+```sh
+$ mdn array.of
+$ mdn background-image --language=css
+```
 
 ## License
 
