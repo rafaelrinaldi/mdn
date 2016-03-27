@@ -1,0 +1,22 @@
+{
+  "author": "Rafael Rinaldi <rafael@rinaldi.io> (http://rinaldi.io)",
+  "name": "mdn",
+  "description": "Man pages for web APIs using MDN",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "lint": "xo *.js --space --esnext --env=node",
+    "test": "npm run lint"
+  },
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "cheerio": "^0.20.0",
+    "columnify": "^1.5.4",
+    "got": "^6.2.0",
+    "minimist": "^1.2.0",
+    "wordwrap": "^1.0.0"
+  },
+  "devDependencies": {
+    "xo": "^0.13.0"
+  }
+}

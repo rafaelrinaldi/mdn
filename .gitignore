@@ -1,0 +1,11 @@
+# OS stuff
+.DS_Store
+.DS_Store?
+Icon?
+
+# Node.js stuff
+node_modules
+
+# Vim stuff
+*.swp
+*.swo
