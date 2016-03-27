@@ -5,6 +5,8 @@
 
 > Man pages for web APIs using [MDN][mdn]
 
+![screenshot](screenshot.png)
+
 ## Install
 
 ```sh
