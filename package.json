@@ -1,9 +1,22 @@
 {
-  "author": "Rafael Rinaldi <rafael@rinaldi.io> (http://rinaldi.io)",
-  "name": "mdn",
+  "name": "@rafaelrinaldi/mdn",
   "description": "Man pages for web APIs using MDN",
   "version": "1.0.0",
+  "author": "Rafael Rinaldi <rafael@rinaldi.io> (http://rinaldi.io)",
+  "homepage": "https://github.com/rafaelrinaldi/mdn",
+  "engines": {
+    "node": ">=4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rafaelrinaldi/mdn.git"
+  },
+  "bin": "cli.js",
   "license": "MIT",
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
   "scripts": {
     "lint": "xo *.js --space --esnext --env=node",
     "test": "npm run lint"
