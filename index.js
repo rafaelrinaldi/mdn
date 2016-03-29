@@ -72,7 +72,7 @@ const format = (markup, url) => {
   console.log(`${chalk.dim(url)}`);
 };
 
-const fetch = (keyword, language, web) => {
+const fetch = (keyword, language, shouldOpen) => {
   const parts = keyword.split('.');
   const url = `${SEARCH_URL[language]}/${parts[0]}/${parts[1] || ''}`;
   const options = {
@@ -81,7 +81,7 @@ const fetch = (keyword, language, web) => {
     }
   };
 
-  if (web) {
+  if (shouldOpen) {
     return open(url);
   }
 
@@ -100,4 +100,4 @@ const fetch = (keyword, language, web) => {
     });
 };
 
-module.exports = options => fetch(options.keyword, options.language, options.web);
+module.exports = options => fetch(options.keyword, options.language, options.shouldOpen);
