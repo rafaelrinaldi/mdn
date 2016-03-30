@@ -82,7 +82,9 @@ const fetch = (keyword, language, shouldOpen) => {
   };
 
   if (shouldOpen) {
-    return open(url);
+    return new Promise(function(resolve) {
+      resolve(open(url));
+    });
   }
 
   return got(url, options)
