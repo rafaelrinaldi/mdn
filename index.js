@@ -5,6 +5,7 @@ const cheerio = require('cheerio');
 const table = require('columnify');
 const chalk = require('chalk');
 const wrap = require('wordwrap')(90);
+const open = require('open');
 
 const BASE_URL = 'https://developer.mozilla.org/en-US/docs/Web';
 const SEARCH_URL = {
@@ -71,7 +72,7 @@ const format = (markup, url) => {
   console.log(`${chalk.dim(url)}`);
 };
 
-const fetch = (keyword, language) => {
+const fetch = (keyword, language, shouldOpen) => {
   const parts = keyword.split('.');
   const url = `${SEARCH_URL[language]}/${parts[0]}/${parts[1] || ''}`;
   const options = {
@@ -79,6 +80,13 @@ const fetch = (keyword, language) => {
       'user-agent': 'https://github.com/rafaelrinaldi/mdn'
     }
   };
+
+  if (shouldOpen) {
+    return new Promise(function(resolve) {
+      resolve(open(url));
+    });
+  }
+
   return got(url, options)
     .then(response => {
       format(response.body, url);
@@ -94,4 +102,4 @@ const fetch = (keyword, language) => {
     });
 };
 
-module.exports = options => fetch(options.keyword, options.language);
+module.exports = options => fetch(options.keyword, options.language, options.shouldOpen);

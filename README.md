@@ -18,6 +18,7 @@ $ npm i @rafaelrinaldi/mdn -g
 ```sh
 $ mdn array.of
 $ mdn background-image --language=css
+$ mdn function.bind --web
 ```
 
 ## License

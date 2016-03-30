@@ -8,12 +8,14 @@ const version = require('./package.json').version;
 const defaults = {
   boolean: [
     'help',
-    'version'
+    'version',
+    'open'
   ],
   alias: {
     h: 'help',
     v: 'version',
-    l: 'language'
+    l: 'language',
+    o: 'open'
   },
   default: {
     language: 'js'
@@ -33,6 +35,7 @@ Options:
   -v --version          Display current software version
   -h --help             Display software help and usage details
   -l --language         Specify a language to search for the keyword (defaults to "js")
+  -o --open             Open MDN page in web browser
 `;
 
 const run = options => {
@@ -48,9 +51,10 @@ const run = options => {
 
   const keyword = options._[0];
   const language = options.language || 'js';
+  const shouldOpen = options.open || false;
 
   if (keyword !== undefined && keyword.length) {
-    mdn({keyword, language});
+    mdn({keyword, language, shouldOpen});
   } else {
     process.stderr.write('You must provide a valid keyword\n');
     process.exit(1);
