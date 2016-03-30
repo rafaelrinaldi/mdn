@@ -18,7 +18,8 @@ $ npm i @rafaelrinaldi/mdn -g
 ```sh
 $ mdn array.of
 $ mdn background-image --language=css
-$ mdn function.bind --web
+$ # Will open the MDN page on user's default browser
+$ mdn function.bind --open
 ```
 
 ## License
