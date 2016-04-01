@@ -45,21 +45,23 @@ const format = (markup, url) => {
     console.log(`${usage}\n`);
   }
 
-  $('#wikiArticle dl dt').each((index, element) => {
-    const $element = $(element);
-    const term = $element.text();
-    const definition = $element
-      .next('dd')
-      .text()
-      .replace(new RegExp(term, 'gim'), chalk.bold(term));
+  $('#wikiArticle dl dt')
+    .has('code')
+    .each((index, element) => {
+      const $element = $(element);
+      const term = $element.text();
+      const definition = $element
+        .next('dd')
+        .text()
+        .replace(new RegExp(term, 'gim'), chalk.bold(term));
 
-    api.push({
-      term: chalk.bold(term),
-      definition
+      api.push({
+        term: chalk.bold(term),
+        definition
+      });
+
+      api.push({term: '', definition: ''});
     });
-
-    api.push({term: '', definition: ''});
-  });
 
   console.log(table(api, {
     showHeaders: false,
