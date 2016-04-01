@@ -63,7 +63,17 @@ const format = (markup, url) => {
       api.push({term: '', definition: ''});
     });
 
-  console.log(table(api, {
+  const cleanApi = api.map(t => {
+    if (t.term === chalk.bold('callback')) {
+      return {
+        term: t.term,
+        definition: t.definition.substr(0, t.definition.indexOf(':') + 1)
+      };
+    }
+    return t;
+  });
+
+  console.log(table(cleanApi, {
     showHeaders: false,
     config: {
       term: {
