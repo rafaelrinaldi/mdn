@@ -37,9 +37,12 @@ const format = (markup, url) => {
 
   const api = [];
 
-  console.log(`\n${chalk.bold(title)}\n`);
-  console.log(wrap(description));
-  console.log(`\n${usage}\n`);
+  console.log(`\n${chalk.bold(title)}`);
+  console.log(`\n${wrap(description)}\n`);
+
+  if (/[a-z]/.test(usage)) {
+    console.log(`${usage}\n`);
+  }
 
   $('#wikiArticle dl dt').each((index, element) => {
     const $element = $(element);
