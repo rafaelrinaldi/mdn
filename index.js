@@ -73,7 +73,7 @@ const format = (markup, url) => {
 };
 
 const fetch = (keyword, language, shouldOpen) => {
-  const parts = keyword.split('.');
+  const parts = keyword.replace(/prototype\./, '').split('.');
   const url = `${SEARCH_URL[language]}/${parts[0]}/${parts[1] || ''}`;
   const options = {
     headers: {
@@ -82,9 +82,7 @@ const fetch = (keyword, language, shouldOpen) => {
   };
 
   if (shouldOpen) {
-    return new Promise(function(resolve) {
-      resolve(open(url));
-    });
+    return new Promise(resolve => resolve(open(url)));
   }
 
   return got(url, options)
