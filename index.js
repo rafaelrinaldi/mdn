@@ -19,8 +19,9 @@ const format = (markup, url) => {
   const method = title.split('.').pop();
   const methodWithoutParens = method.replace(/\(\)/, '');
   const description = $('#wikiArticle > p')
-    .first()
-    .text()
+    .filter((i, e) => Boolean($(e).text())) // filter empty paragraphs
+    .map((i, e) => $(e).text())
+    .get()[0]
     .replace(title, chalk.bold(title))
     .replace(method, chalk.bold(method));
 
