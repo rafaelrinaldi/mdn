@@ -19,8 +19,8 @@ const format = (markup, url) => {
   const method = title.split('.').pop();
   const methodWithoutParens = method.replace(/\(\)/, '');
   const description = $('#wikiArticle > p')
-    .filter((i, e) => Boolean($(e).text())) // filter empty paragraphs
-    .map((i, e) => $(e).text())
+    .filter((index, element) => Boolean($(element).text())) // filter empty paragraphs
+    .map((index, element) => $(element).text())
     .get()[0]
     .replace(title, chalk.bold(title))
     .replace(method, chalk.bold(method));
@@ -63,14 +63,14 @@ const format = (markup, url) => {
       api.push({term: '', definition: ''});
     });
 
-  const cleanApi = api.map(t => {
-    if (t.term === chalk.bold('callback')) {
+  const cleanApi = api.map(apiObject => {
+    if (apiObject.term === chalk.bold('callback')) {
       return {
-        term: t.term,
-        definition: t.definition.substr(0, t.definition.indexOf(':') + 1)
+        term: apiObject.term,
+        definition: apiObject.definition.substr(0, apiObject.definition.indexOf(':') + 1)
       };
     }
-    return t;
+    return apiObject;
   });
 
   console.log(table(cleanApi, {
