@@ -12,9 +12,7 @@ const SEARCH_URL = {
   css: 'CSS'
 };
 
-const getBaseUrl = idiom => {
-  return `https://developer.mozilla.org/${idiom}/docs/Web`;
-};
+const getBaseUrl = locale => `https://developer.mozilla.org/${locale}/docs/Web`;
 
 const format = (markup, url) => {
   const $ = cheerio.load(markup);
@@ -75,8 +73,8 @@ const format = (markup, url) => {
   console.log(`${chalk.dim(url)}`);
 };
 
-const fetch = (keyword, language, shouldOpen, idiom) => {
-  const baseUrl = getBaseUrl(idiom);
+const fetch = (keyword, language, shouldOpen, locale) => {
+  const baseUrl = getBaseUrl(locale);
   const parts = keyword.split('.');
   const url = `${baseUrl}/${SEARCH_URL[language]}/${parts[0]}/${parts[1] || ''}`;
   const options = {
@@ -112,5 +110,5 @@ module.exports = options => fetch(
   options.keyword,
   options.language,
   options.shouldOpen,
-  options.idiom
+  options.locale
 );

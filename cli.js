@@ -16,11 +16,11 @@ const defaults = {
     v: 'version',
     l: 'language',
     o: 'open',
-    i: 'idiom'
+    lc: 'locale'
   },
   default: {
     language: 'js',
-    idiom: 'en-US'
+    locale: 'en-US'
   }
 };
 const options = minimist(process.argv.slice(2), defaults);
@@ -32,14 +32,14 @@ Usage: mdn <KEYWORD>
 Example:
   $ mdn object.freeze
   $ mdn background-image --language=css
-  $ mdn background --language=css --idiom=pt-BR
+  $ mdn background --language=css --locale=pt-BR
 
 Options:
-  -v  --version         Display current software version
-  -h  --help            Display software help and usage details
-  -l  --language        Specify a language to search for the keyword (defaults to "js")
-  -o  --open            Open MDN page in web browser
-  -i  --idiom           Specify a idiom (defaults to "en-US")
+  -v   --version         Display current software version
+  -h   --help            Display software help and usage details
+  -l   --language        Specify a language to search for the keyword (defaults to "js")
+  -o   --open            Open MDN page in web browser
+  -lc  --locale          Specify a locale (defaults to "en-US")
 `;
 
 const run = options => {
@@ -56,10 +56,10 @@ const run = options => {
   const keyword = options._[0];
   const language = options.language || 'js';
   const shouldOpen = options.open || false;
-  const idiom = options.idiom || 'en-US';
+  const locale = options.locale || 'en-US';
 
   if (keyword !== undefined && keyword.length) {
-    mdn({keyword, language, shouldOpen, idiom});
+    mdn({keyword, language, shouldOpen, locale});
   } else {
     process.stderr.write('You must provide a valid keyword\n');
     process.exit(1);
