@@ -59,7 +59,12 @@ const run = options => {
   const locale = options.locale || 'en-US';
 
   if (keyword !== undefined && keyword.length) {
-    mdn({keyword, language, shouldOpen, locale});
+    mdn({
+      keyword, 
+      language, 
+      shouldOpen, 
+      locale
+    });
   } else {
     process.stderr.write('You must provide a valid keyword\n');
     process.exit(1);
