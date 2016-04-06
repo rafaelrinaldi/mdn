@@ -7,11 +7,12 @@ const chalk = require('chalk');
 const wrap = require('wordwrap')(90);
 const open = require('open');
 
-const BASE_URL = 'https://developer.mozilla.org/en-US/docs/Web';
 const SEARCH_URL = {
-  js: `${BASE_URL}/JavaScript/Reference/Global_Objects`,
-  css: `${BASE_URL}/CSS`
+  js: 'JavaScript/Reference/Global_Objects',
+  css: 'CSS'
 };
+
+const getBaseUrl = locale => `https://developer.mozilla.org/${locale}/docs/Web`;
 
 const format = (markup, url) => {
   const $ = cheerio.load(markup);
@@ -72,17 +73,20 @@ const format = (markup, url) => {
   console.log(`${chalk.dim(url)}`);
 };
 
-const fetch = (keyword, language, shouldOpen) => {
+const fetch = (keyword, language, shouldOpen, locale) => {
+  const baseUrl = getBaseUrl(locale);
   const parts = keyword.split('.');
-  const url = `${SEARCH_URL[language]}/${parts[0]}/${parts[1] || ''}`;
+  const url = `${baseUrl}/${SEARCH_URL[language]}/${parts[0]}/${parts[1] || ''}`;
   const options = {
     headers: {
       'user-agent': 'https://github.com/rafaelrinaldi/mdn'
     }
   };
 
+  console.log(url);
+
   if (shouldOpen) {
-    return new Promise(function(resolve) {
+    return new Promise(resolve => {
       resolve(open(url));
     });
   }
@@ -102,4 +106,9 @@ const fetch = (keyword, language, shouldOpen) => {
     });
 };
 
-module.exports = options => fetch(options.keyword, options.language, options.shouldOpen);
+module.exports = options => fetch(
+  options.keyword,
+  options.language,
+  options.shouldOpen,
+  options.locale
+);
