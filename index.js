@@ -20,6 +20,7 @@ const format = (markup, url) => {
   const method = title.split('.').pop();
   const methodWithoutParens = method.replace(/\(\)/, '');
   const description = $('#wikiArticle > p')
+    .filter((index, element) => $(element).text().length !== 0)
     .first()
     .text()
     .replace(title, chalk.bold(title))
@@ -38,25 +39,30 @@ const format = (markup, url) => {
 
   const api = [];
 
-  console.log(`\n${chalk.bold(title)}\n`);
-  console.log(wrap(description));
-  console.log(`\n${usage}\n`);
+  console.log(`\n${chalk.bold(title)}`);
+  console.log(`\n${wrap(description)}\n`);
 
-  $('#wikiArticle dl dt').each((index, element) => {
-    const $element = $(element);
-    const term = $element.text();
-    const definition = $element
-      .next('dd')
-      .text()
-      .replace(new RegExp(term, 'gim'), chalk.bold(term));
+  if (/[a-z]/.test(usage)) {
+    console.log(`${usage}\n`);
+  }
 
-    api.push({
-      term: chalk.bold(term),
-      definition
+  $('#wikiArticle dl dt')
+    .has('code')
+    .each((index, element) => {
+      const $element = $(element);
+      const term = $element.text();
+      const definition = $element
+        .next('dd')
+        .text()
+        .replace(new RegExp(term, 'gim'), chalk.bold(term));
+
+      api.push({
+        term: chalk.bold(term),
+        definition
+      });
+
+      api.push({term: '', definition: ''});
     });
-
-    api.push({term: '', definition: ''});
-  });
 
   console.log(table(api, {
     showHeaders: false,
@@ -75,15 +81,13 @@ const format = (markup, url) => {
 
 const fetch = (keyword, language, shouldOpen, locale) => {
   const baseUrl = getBaseUrl(locale);
-  const parts = keyword.split('.');
+  const parts = keyword.replace(/prototype\./, '').split('.');
   const url = `${baseUrl}/${SEARCH_URL[language]}/${parts[0]}/${parts[1] || ''}`;
   const options = {
     headers: {
       'user-agent': 'https://github.com/rafaelrinaldi/mdn'
     }
   };
-
-  console.log(url);
 
   if (shouldOpen) {
     return new Promise(resolve => {

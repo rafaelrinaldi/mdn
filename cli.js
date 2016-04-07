@@ -60,9 +60,9 @@ const run = options => {
 
   if (keyword !== undefined && keyword.length) {
     mdn({
-      keyword, 
-      language, 
-      shouldOpen, 
+      keyword,
+      language,
+      shouldOpen,
       locale
     });
   } else {
