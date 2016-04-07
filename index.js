@@ -20,9 +20,9 @@ const format = (markup, url) => {
   const method = title.split('.').pop();
   const methodWithoutParens = method.replace(/\(\)/, '');
   const description = $('#wikiArticle > p')
-    .filter((index, element) => Boolean($(element).text())) // filter empty paragraphs
-    .map((index, element) => $(element).text())
-    .get()[0]
+    .filter((index, element) => $(element).text().length !== 0)
+    .first()
+    .text()
     .replace(title, chalk.bold(title))
     .replace(method, chalk.bold(method));
 
@@ -64,17 +64,7 @@ const format = (markup, url) => {
       api.push({term: '', definition: ''});
     });
 
-  const cleanApi = api.map(apiObject => {
-    if (apiObject.term === chalk.bold('callback')) {
-      return {
-        term: apiObject.term,
-        definition: apiObject.definition.substr(0, apiObject.definition.indexOf(':') + 1)
-      };
-    }
-    return apiObject;
-  });
-
-  console.log(table(cleanApi, {
+  console.log(table(api, {
     showHeaders: false,
     config: {
       term: {
@@ -98,8 +88,6 @@ const fetch = (keyword, language, shouldOpen, locale) => {
       'user-agent': 'https://github.com/rafaelrinaldi/mdn'
     }
   };
-
-  console.log(url);
 
   if (shouldOpen) {
     return new Promise(resolve => {
