@@ -9,7 +9,8 @@ const defaults = {
   boolean: [
     'help',
     'version',
-    'open'
+    'open',
+    'css'
   ],
   alias: {
     h: 'help',
@@ -21,7 +22,8 @@ const defaults = {
   default: {
     language: 'js',
     locale: 'en-US',
-    open: false
+    open: false,
+    css: false
   }
 };
 
@@ -40,6 +42,7 @@ Options:
   -v   --version         Display current software version
   -h   --help            Display software help and usage details
   -l   --language        Specify a language to search for the keyword (defaults to "js")
+       --css             Equivalent to "-l css"
   -o   --open            Open MDN page in web browser
   -lc  --locale          Specify a locale (defaults to "en-US")
 `;
@@ -56,7 +59,7 @@ const run = options => {
   }
 
   const keyword = options._[0];
-  const language = options.language;
+  const language = (options.css) ? 'css' : options.language;
   const shouldOpen = options.open;
   const locale = options.locale;
 
