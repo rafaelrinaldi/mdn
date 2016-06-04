@@ -20,9 +20,11 @@ const defaults = {
   },
   default: {
     language: 'js',
-    locale: 'en-US'
+    locale: 'en-US',
+    open: false
   }
 };
+
 const options = minimist(process.argv.slice(2), defaults);
 const help = `
 Usage: mdn <KEYWORD>
@@ -54,9 +56,9 @@ const run = options => {
   }
 
   const keyword = options._[0];
-  const language = options.language || 'js';
-  const shouldOpen = options.open || false;
-  const locale = options.locale || 'en-US';
+  const language = options.language;
+  const shouldOpen = options.open;
+  const locale = options.locale;
 
   if (keyword !== undefined && keyword.length) {
     mdn({
