@@ -83,6 +83,13 @@ const format = (markup, url) => {
     }
   }));
 
+  const returnValue = $('#Return_value + p').text();
+
+  if (returnValue.length > 0) {
+    const recased = returnValue[0].toLowerCase() + returnValue.substr(1);
+    console.log(`\n${wrap(chalk.bold('Returns ') + recased)}\n`);
+  }
+
   console.log(`${chalk.dim(url)}`);
 };
 
