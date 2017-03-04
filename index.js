@@ -50,11 +50,21 @@ const format = (markup, url) => {
     .has('code')
     .each((index, element) => {
       const $element = $(element);
-      const term = $element.text();
+      const isNested = $element.parent().parent().is('dd');
+
+      const term = $element
+        .find('code')
+        .contents()
+        .not('span')
+        .text()
+        .replace(/^/, isNested ? '  ' : '');
+
       const definition = $element
         .next('dd')
+        .contents()
+        .not('dl')
         .text()
-        .replace(new RegExp(term, 'gim'), chalk.bold(term));
+        .replace(new RegExp(term.trim(), 'gim'), chalk.bold(term.trim()));
 
       api.push({
         term: chalk.bold(term),
@@ -75,6 +85,13 @@ const format = (markup, url) => {
       }
     }
   }));
+
+  const returnValue = $('#Return_value + p').text();
+
+  if (returnValue.length > 0) {
+    const recased = returnValue[0].toLowerCase() + returnValue.substr(1);
+    console.log(`\n${wrap(chalk.bold('Returns ') + recased)}\n`);
+  }
 
   console.log(`${chalk.dim(url)}`);
 };
