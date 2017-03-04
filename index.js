@@ -46,22 +46,48 @@ const format = (markup, url) => {
     console.log(`${usage}\n`);
   }
 
-  $('#wikiArticle dl dt')
+  $('#wikiArticle').children('dl').children('dt')
     .has('code')
     .each((index, element) => {
       const $element = $(element);
       const term = $element.text();
-      const definition = $element
-        .next('dd')
-        .text()
-        .replace(new RegExp(term, 'gim'), chalk.bold(term));
+      const $definition = $element.next('dd');
 
-      api.push({
-        term: chalk.bold(term),
-        definition
-      });
+      if ($definition.has('dl').length === 0) {
+        api.push({
+          term: chalk.bold(term),
+          definition: $definition.text().replace(new RegExp(term, 'gim'), chalk.bold(term))
+        });
 
-      api.push({term: '', definition: ''});
+        api.push({
+          term: '',
+          definition: ''
+        });
+      } else {
+        api.push({
+          term: chalk.bold(term),
+          definition: $definition.text().substr(0, $definition.text().search('\n'))
+        });
+
+        $definition.children('dl').children('dt').each((subIndex, subElement) => {
+          const $subElement = $(subElement);
+          const subTerm = $subElement.text();
+          const subDefinition = $subElement
+            .next('dd')
+            .text()
+            .replace(new RegExp(subTerm, 'gim'), chalk.underline(subTerm));
+
+          api.push({
+            term: `..${chalk.underline(subTerm)}`,
+            definition: `..${subDefinition}`
+          });
+        });
+
+        api.push({
+          term: '',
+          definition: ''
+        });
+      }
     });
 
   console.log(table(api, {
