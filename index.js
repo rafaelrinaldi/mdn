@@ -50,11 +50,18 @@ const format = (markup, url) => {
     .has('code')
     .each((index, element) => {
       const $element = $(element);
-      const term = $element.text();
+      const isNested = $element.parent().parent().is('dd');
+
+      const term = $element
+        .text()
+        .replace(/^/, isNested ? '  ' : '');
+
       const definition = $element
         .next('dd')
+        .contents()
+        .not('dl')
         .text()
-        .replace(new RegExp(term, 'gim'), chalk.bold(term));
+        .replace(new RegExp(term.trim(), 'gim'), chalk.bold(term.trim()));
 
       api.push({
         term: chalk.bold(term),
