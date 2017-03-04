@@ -16,6 +16,7 @@ const defaults = {
     h: 'help',
     v: 'version',
     l: 'language',
+    c: 'css',
     o: 'open',
     lc: 'locale'
   },
@@ -42,7 +43,7 @@ Options:
   -v   --version         Display current software version
   -h   --help            Display software help and usage details
   -l   --language        Specify a language to search for the keyword (defaults to "js")
-       --css             Equivalent to "-l css"
+  -c   --css             Specify css as the language
   -o   --open            Open MDN page in web browser
   -lc  --locale          Specify a locale (defaults to "en-US")
 `;
