@@ -53,6 +53,9 @@ const format = (markup, url) => {
       const isNested = $element.parent().parent().is('dd');
 
       const term = $element
+        .find('code')
+        .contents()
+        .not('span')
         .text()
         .replace(/^/, isNested ? '  ' : '');
 
