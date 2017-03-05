@@ -1,7 +1,7 @@
 {
   "name": "@rafaelrinaldi/mdn",
   "description": "Man pages for web APIs using MDN",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "author": "Rafael Rinaldi <rafael@rinaldi.io> (http://rinaldi.io)",
   "homepage": "https://github.com/rafaelrinaldi/mdn",
   "engines": {
