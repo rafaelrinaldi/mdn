@@ -25,3 +25,9 @@ $ mdn function.bind --open
 ## License
 
 MIT © [Rafael Rinaldi][author]
+
+---
+
+<p align="center">
+  <a href="https://buymeacoff.ee/rinaldi" title="Buy me a coffee">Buy me a ☕</a>
+</p>
