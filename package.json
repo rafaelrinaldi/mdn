@@ -27,7 +27,7 @@
     "columnify": "^1.5.4",
     "got": "^6.2.0",
     "minimist": "^1.2.0",
-    "open": "6.4.0",
+    "open": "7.0.0",
     "wordwrap": "^1.0.0"
   },
   "devDependencies": {
