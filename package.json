@@ -31,6 +31,6 @@
     "wordwrap": "^1.0.0"
   },
   "devDependencies": {
-    "xo": "^0.13.0"
+    "xo": "^0.28.0"
   }
 }
